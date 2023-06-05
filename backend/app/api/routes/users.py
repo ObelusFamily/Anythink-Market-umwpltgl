@@ -31,6 +31,7 @@ async def retrieve_current_user(
             bio=user.bio,
             image=user.image,
             token=token,
+            is_verified=user.is_verified,
         ),
     )
 
