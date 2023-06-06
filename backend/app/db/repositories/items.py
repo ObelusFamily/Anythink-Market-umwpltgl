@@ -119,6 +119,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         limit: int = 20,
         offset: int = 0,
         requested_user: Optional[User] = None,
+        title: Optional[str] = None
     ) -> List[Item]:
         query_params: List[Union[str, int]] = []
         query_params_count = 0
@@ -146,6 +147,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             ),
         ).orderby(
             items.created_at, order=Order.desc,
+        ).where(
+            items.title.like(f'%{title}%'),
         )
         # fmt: on
 
