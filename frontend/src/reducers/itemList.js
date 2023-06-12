@@ -10,6 +10,7 @@ import {
   PROFILE_PAGE_UNLOADED,
   PROFILE_FAVORITES_PAGE_LOADED,
   PROFILE_FAVORITES_PAGE_UNLOADED,
+  ADD_SEARCH_FILTER,
 } from "../constants/actionTypes";
 
 const reducer = (state = {}, action) => {
@@ -37,6 +38,16 @@ const reducer = (state = {}, action) => {
         currentPage: action.page,
       };
     case APPLY_TAG_FILTER:
+      return {
+        ...state,
+        pager: action.pager,
+        items: action.payload.items,
+        itemsCount: action.payload.itemsCount,
+        tab: null,
+        tag: action.tag,
+        currentPage: 0,
+      };
+    case ADD_SEARCH_FILTER:
       return {
         ...state,
         pager: action.pager,

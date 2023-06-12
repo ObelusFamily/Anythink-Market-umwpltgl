@@ -50,7 +50,7 @@ const Tags = {
   getAll: () => requests.get("/tags"),
 };
 
-const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}&title=`;
+const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
 const Items = {
   all: (page) => requests.get(`/items?${limit(1000, page)}`),
@@ -68,6 +68,7 @@ const Items = {
   update: (item) =>
     requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
   create: (item) => requests.post("/items", { item }),
+  search: (title, page) => requests.get(`/items?${limit(1000, page)}&title=${title}`)
 };
 
 const Comments = {

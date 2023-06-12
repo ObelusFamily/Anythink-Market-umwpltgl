@@ -8,6 +8,7 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
+  ADD_SEARCH_FILTER,
 } from "../../constants/actionTypes";
 
 const Promise = global.Promise;
@@ -24,9 +25,10 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
+  onSearch: (title, pager, payload) => dispatch({type: ADD_SEARCH_FILTER, title, pager, payload})
 });
 
-const Home = ({onLoad, onUnload, tags, onClickTag}) => {
+const Home = ({onLoad, onUnload, tags, onClickTag, onSearch}) => {
   const tab = "all";
   const itemsPromise = agent.Items.all;
 
@@ -41,7 +43,7 @@ const Home = ({onLoad, onUnload, tags, onClickTag}) => {
 
     return (
       <div className="home-page">
-        <Banner />
+        <Banner onSearch={onSearch} />
 
         <div className="container page">
           <Tags tags={tags} onClickTag={onClickTag} />
