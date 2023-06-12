@@ -147,10 +147,13 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             ),
         ).orderby(
             items.created_at, order=Order.desc,
-        ).where(
-            items.title.like(f'%{title}%'),
-        )
-        # fmt: on
+        )        # fmt: on
+
+        if title:
+
+            query = query.where(
+                items.title.like(f'%{title}%')
+            )
 
         if tag:
             query_params.append(tag)
