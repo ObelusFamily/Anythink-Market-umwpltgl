@@ -33,7 +33,6 @@ async def list_items(
     items_filters: ItemsFilters = Depends(get_items_filters),
     user: Optional[User] = Depends(get_current_user_authorizer(required=False)),
     items_repo: ItemsRepository = Depends(get_repository(ItemsRepository)),
-    title: Optional[str] = None, 
 ) -> ListOfItemsInResponse:
     items = await items_repo.filter_items(
         tag=items_filters.tag,
@@ -42,7 +41,6 @@ async def list_items(
         limit=items_filters.limit,
         offset=items_filters.offset,
         requested_user=user,
-        title=title,
     )
     items_for_response = [
         ItemForResponse.from_orm(item) for item in items
