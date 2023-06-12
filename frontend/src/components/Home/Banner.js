@@ -4,7 +4,7 @@ import agent from "../../agent"
 const Banner = ({ onSearch }) => {
   const handleSearch = (e) => {
     e.preventDefault()
-    if (e.target.value.length >+ 3) {
+    if (e.target.value.length >= 3) {
       const title = e.target.value
       onSearch(
         e.target.value,
